@@ -38,7 +38,7 @@ RUN apt-get update \
 ARG GID_NAME
 ARG UID_NAME
 RUN addgroup ${GID_NAME} \
-    && adduser --ingroup ${GID_NAME} --home /home/${UID_NAME} --disabled-password --gecos "" ${UID_NAME}
+    && adduser --ingroup ${GID_NAME} --home /home/project --disabled-password --gecos "" ${UID_NAME}
 
 RUN mkdir -p /home/theia
 WORKDIR /home/theia
@@ -52,4 +52,4 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
 EXPOSE 3000
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
-ENTRYPOINT [ "yarn", "theia", "start", "/home/${UID_NAME}", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
